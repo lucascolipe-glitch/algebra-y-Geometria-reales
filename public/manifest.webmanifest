@@ -1,0 +1,15 @@
+{
+  "name": "Álgebra y Geometría I · Números Reales",
+  "short_name": "Números Reales",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#173d7a",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

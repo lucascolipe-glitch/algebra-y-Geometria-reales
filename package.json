@@ -1,0 +1,14 @@
+{
+  "name": "algebra-geometria-1-reales",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Teoría, práctica y actividades interactivas de Números Reales para Álgebra y Geometría I.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "CC-BY-NC-SA-4.0"
+}
