@@ -262,9 +262,9 @@
   function setupTrueFalse() {
     const statements = [
       { text: String.raw`Para todo \(a\in\mathbb R\), existe \(1/a\in\mathbb R\).`, answer: false, explanation: String.raw`Falso. Si \(a=0\), \(1/a\) no está definido.` },
-      { text: String.raw`Si \(a<b\), entonces \(ac<bc\) para todo \(c\in\mathbb R\).`, answer: false, explanation: String.raw`Falso. Si \(c<0\), el sentido se invierte; si \(c=0\), los productos son iguales.` },
-      { text: String.raw`Si \(a<b\), entonces \(a-b<0\).`, answer: true, explanation: String.raw`Verdadero. Restar \(b\) en ambos miembros da \(a-b<0\).` },
-      { text: String.raw`Si \(a<b\), entonces \(a^2<b^2\).`, answer: false, explanation: String.raw`Falso. Por ejemplo, \(-3<-2\), pero \(9>4\).` }
+      { text: String.raw`Si \(a\lt b\), entonces \(ac\lt bc\) para todo \(c\in\mathbb R\).`, answer: false, explanation: String.raw`Falso. Si \(c\lt 0\), el sentido se invierte; si \(c=0\), los productos son iguales.` },
+      { text: String.raw`Si \(a\lt b\), entonces \(a-b\lt 0\).`, answer: true, explanation: String.raw`Verdadero. Restar \(b\) en ambos miembros da \(a-b\lt 0\).` },
+      { text: String.raw`Si \(a\lt b\), entonces \(a^2\lt b^2\).`, answer: false, explanation: String.raw`Falso. Por ejemplo, \(-3\lt -2\), pero \(9\gt 4\).` }
     ];
     const root = $('#vfList');
     root.innerHTML = statements.map((item, index) => `
@@ -361,7 +361,7 @@
   function setupStrategyActivity() {
     const data = [
       { q: String.raw`\(x^4-10x^2+9=0\)`, options: ['Aplicar logaritmos', 'Hacer \(y=x^2\)', 'Multiplicar por \(x\)'], answer: 1 },
-      { q: String.raw`\(\sqrt{x}-2/\sqrt{x}=1\)`, options: ['Escribir primero \(x>0\)', 'Cancelar las raíces', 'Suponer \(x<0\)'], answer: 0 },
+      { q: String.raw`\(\sqrt{x}-2/\sqrt{x}=1\)`, options: ['Escribir primero \(x>0\)', 'Cancelar las raíces', 'Suponer \(x\lt 0\)'], answer: 0 },
       { q: String.raw`\(\frac{x+2}{x-2}=\frac{x+3}{x-3}+\frac2{(x-2)(x-3)}\)`, options: ['Eliminar denominadores sin restricciones', 'Anotar \(x\ne2,3\)', 'Tomar logaritmo'], answer: 1 },
       { q: String.raw`\(2^{x^2-x-3}=\frac12\)`, options: ['Escribir \(\frac12=2^{-1}\)', 'Elevar al cuadrado', 'Factorizar el denominador'], answer: 0 }
     ];
@@ -412,7 +412,7 @@
         expression: String.raw`\[\sqrt[3]{x-\frac54}\]`,
         options: [
           { text: String.raw`\(x-\frac54\ge0\)`, correct: false },
-          { text: String.raw`\(x-\frac54>0\)`, correct: false },
+          { text: String.raw`\(x-\frac54\gt 0\)`, correct: false },
           { text: 'No hay restricciones: la raíz tiene índice impar', correct: true }
         ],
         result: String.raw`\(D=\mathbb R\)`
@@ -422,7 +422,7 @@
         options: [
           { text: String.raw`\(x+3\ge0\)`, correct: true },
           { text: String.raw`\(x-2\ne0\)`, correct: true },
-          { text: String.raw`\(x+3>0\)`, correct: false },
+          { text: String.raw`\(x+3\gt 0\)`, correct: false },
           { text: 'No hay restricciones', correct: false }
         ],
         result: String.raw`\(D=[-3,2)\cup(2,+\infty)\)`
@@ -431,7 +431,7 @@
         expression: String.raw`\[\frac{\sqrt{x^2-4}}{\log(x+5)}\]`,
         options: [
           { text: String.raw`\(x^2-4\ge0\)`, correct: true },
-          { text: String.raw`\(x+5>0\)`, correct: true },
+          { text: String.raw`\(x+5\gt  0\)`, correct: true },
           { text: String.raw`\(\log(x+5)\ne0\)`, correct: true },
           { text: String.raw`\(x^2-4>0\)`, correct: false }
         ],
