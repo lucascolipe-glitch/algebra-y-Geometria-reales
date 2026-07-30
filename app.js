@@ -261,7 +261,7 @@
 
   function setupTrueFalse() {
     const statements = [
-      { text: String.raw`Para todo \(a\in\mathbb R\), existe \(1/a\in\mathbb R\).`, answer: false, explanation: String.raw`Falso. Si \(a=0\), \(1/a\) no está definido.` },
+      { text: String.raw`Para todo \(a\in\mathbb R\), existe \(\frac{1}{a}\in\mathbb R\).`, answer: false, explanation: String.raw`Falso. Si \(a=0\), \(1/a\) no está definido.` },
       { text: String.raw`Si \(a\lt b\), entonces \(ac\lt bc\) para todo \(c\in\mathbb R\).`, answer: false, explanation: String.raw`Falso. Si \(c\lt 0\), el sentido se invierte; si \(c=0\), los productos son iguales.` },
       { text: String.raw`Si \(a\lt b\), entonces \(a-b\lt 0\).`, answer: true, explanation: String.raw`Verdadero. Restar \(b\) en ambos miembros da \(a-b\lt 0\).` },
       { text: String.raw`Si \(a\lt b\), entonces \(a^2\lt b^2\).`, answer: false, explanation: String.raw`Falso. Por ejemplo, \(-3\lt -2\), pero \(9\gt 4\).` }
