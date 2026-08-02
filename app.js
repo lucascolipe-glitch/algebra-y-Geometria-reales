@@ -555,7 +555,7 @@
       { q: String.raw`\(\log_7\sqrt[3]7\)`, answer: '1/3' }
     ];
     const root = $('#logChallenges');
-    root.innerHTML = data.map((item, index) => `<div class="log-challenge"><div>${item.q}</div><input type="text" data-index="${index}" inputmode="decimal" placeholder="Exponente"></div>`).join('');
+    root.innerHTML = data.map((item, index) => `<div class="log-challenge"><div>${item.q}</div><input type="text" data-index="${index}" inputmode="decimal" placeholder="resultado"></div>`).join('');
     $('#checkLogs').addEventListener('click', () => {
       let correct = 0;
       $$('.log-challenge', root).forEach((card, index) => {
@@ -567,7 +567,7 @@
       });
       const feedback = $('#logFeedback');
       feedback.className = `feedback show ${correct === data.length ? 'correct' : 'incorrect'}`;
-      feedback.textContent = correct === data.length ? '¡Excelente! En todos los casos encontraste el exponente correcto.' : `${correct} de ${data.length} correctas. Volvé a la equivalencia log_b(a)=x ⇔ b^x=a.`;
+      feedback.textContent = correct === data.length ? '¡Excelente! En todos los casos encontraste el logaritmo correcto.' : `${correct} de ${data.length} correctas. Volvé a la equivalencia log_b(a)=x ⇔ b^x=a.`;
       if (correct === data.length) markCompleted('activity:logs');
     });
   }
