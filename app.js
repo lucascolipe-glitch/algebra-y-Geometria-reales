@@ -56,6 +56,23 @@
     window.MathJax.typesetPromise(targets).catch(() => {});
   }
 
+  function selectedRadioValue(name, root = document) {
+    return $$('input[type="radio"]', root).find((input) => input.name === name && input.checked)?.value || '';
+  }
+
+  function renderChoiceCards(name, options, ariaLabel, extraClass = '') {
+    return `<div class="choice-cards ${extraClass}" role="radiogroup" aria-label="${escapeHtml(ariaLabel)}">
+      ${options.map((option, index) => {
+        const value = typeof option === 'string' ? String(index) : option.value;
+        const label = typeof option === 'string' ? option : option.label;
+        return `<label class="choice-card">
+          <input type="radio" name="${escapeHtml(name)}" value="${escapeHtml(value)}">
+          <span class="choice-card__content">${label}</span>
+        </label>`;
+      }).join('')}
+    </div>`;
+  }
+
   function showToast(message) {
     const toast = $('#toast');
     toast.textContent = message;
@@ -219,25 +236,28 @@
       { latex: String.raw`\(\sqrt2\)`, answer: 'I' },
       { latex: String.raw`\(\pi-3\)`, answer: 'I' }
     ];
+    const setOptions = [
+      { value: 'N', label: String.raw`\(\mathbb N\)` },
+      { value: 'N0', label: String.raw`\(\mathbb N_0\)` },
+      { value: 'Z', label: String.raw`\(\mathbb Z\)` },
+      { value: 'Q', label: String.raw`\(\mathbb Q\)` },
+      { value: 'I', label: String.raw`\(\mathbb I\)` }
+    ];
     const grid = $('#classifierGrid');
-    grid.innerHTML = data.map((item, index) => `
-      <div class="classifier-item" data-answer="${item.answer}">
-        <div class="number">${item.latex}</div>
-        <select aria-label="Clasificar número ${index + 1}">
-          <option value="">Elegir conjunto…</option>
-          <option value="N">ℕ</option>
-          <option value="N0">ℕ₀</option>
-          <option value="Z">ℤ</option>
-          <option value="Q">ℚ</option>
-          <option value="I">𝕀</option>
-        </select>
-      </div>`).join('');
+    grid.innerHTML = data.map((item, index) => {
+      const name = `classifier-${index}`;
+      return `<fieldset class="classifier-item" data-answer="${item.answer}" data-radio-name="${name}">
+        <legend class="number"><span class="sr-only">Número ${index + 1}: </span>${item.latex}</legend>
+        ${renderChoiceCards(name, setOptions, `Clasificar el número ${index + 1}`, 'choice-cards--sets')}
+      </fieldset>`;
+    }).join('');
+    typeset(grid);
 
     $('#checkClassifier').addEventListener('click', () => {
       const items = $$('.classifier-item', grid);
       let correct = 0;
       items.forEach((item) => {
-        const ok = $('select', item).value === item.dataset.answer;
+        const ok = selectedRadioValue(item.dataset.radioName, item) === item.dataset.answer;
         item.classList.toggle('good', ok);
         item.classList.toggle('bad', !ok);
         if (ok) correct += 1;
@@ -252,7 +272,7 @@
 
     $('#resetClassifier').addEventListener('click', () => {
       $$('.classifier-item', grid).forEach((item) => {
-        $('select', item).value = '';
+        $$('input[type="radio"]', item).forEach((input) => { input.checked = false; });
         item.classList.remove('good', 'bad');
       });
       $('#classifierFeedback').className = 'feedback';
@@ -347,7 +367,7 @@
 
   function setupSetOperations() {
     $('#checkSetOperations').addEventListener('click', () => {
-      const ok = $('#unionAnswer').value === 'correct' && $('#intersectionAnswer').value === 'correct';
+      const ok = selectedRadioValue('unionAnswer') === 'correct' && selectedRadioValue('intersectionAnswer') === 'correct';
       const feedback = $('#setOperationsFeedback');
       feedback.className = `feedback show ${ok ? 'correct' : 'incorrect'}`;
       feedback.innerHTML = ok
@@ -360,22 +380,29 @@
 
   function setupStrategyActivity() {
     const data = [
-      { q: String.raw`\(x^4-10x^2+9=0\)`, options: ['Aplicar logaritmos', 'Hacer \(y=x^2\)', 'Multiplicar por \(x\)'], answer: 1 },
-      { q: String.raw`\(\sqrt{x}-2/\sqrt{x}=1\)`, options: ['Escribir primero \(x>0\)', 'Cancelar las raíces', 'Suponer \(x\lt 0\)'], answer: 0 },
-      { q: String.raw`\(\frac{x+2}{x-2}=\frac{x+3}{x-3}+\frac2{(x-2)(x-3)}\)`, options: ['Eliminar denominadores sin restricciones', 'Anotar \(x\ne2,3\)', 'Tomar logaritmo'], answer: 1 },
-      { q: String.raw`\(2^{x^2-x-3}=\frac12\)`, options: ['Escribir \(\frac12=2^{-1}\)', 'Elevar al cuadrado', 'Factorizar el denominador'], answer: 0 }
+      { q: String.raw`\(x^4-10x^2+9=0\)`, options: ['Aplicar logaritmos', String.raw`Hacer \(y=x^2\)`, String.raw`Multiplicar por \(x\)`], answer: 1 },
+      { q: String.raw`\(\sqrt{x}-2/\sqrt{x}=1\)`, options: [String.raw`Escribir primero \(x>0\)`, 'Cancelar las raíces', String.raw`Suponer \(x\lt 0\)`], answer: 0 },
+      { q: String.raw`\(\frac{x+2}{x-2}=\frac{x+3}{x-3}+\frac2{(x-2)(x-3)}\)`, options: ['Eliminar denominadores sin restricciones', String.raw`Anotar \(x\ne2,3\)`, 'Tomar logaritmo'], answer: 1 },
+      { q: String.raw`\(2^{x^2-x-3}=\frac12\)`, options: [String.raw`Escribir \(\frac12=2^{-1}\)`, 'Elevar al cuadrado', 'Factorizar el denominador'], answer: 0 }
     ];
     const root = $('#strategyQuestions');
-    root.innerHTML = data.map((item, index) => `<div class="strategy-question" data-index="${index}"><p>${item.q}</p><div class="strategy-options">${item.options.map((option, i) => `<button type="button" data-option="${i}">${option}</button>`).join('')}</div></div>`).join('');
-    root.addEventListener('click', (event) => {
-      const button = event.target.closest('button[data-option]');
-      if (!button || button.disabled) return;
-      const question = button.closest('.strategy-question');
+    root.innerHTML = data.map((item, index) => `<div class="strategy-question" data-index="${index}">
+      <p>${item.q}</p>
+      ${renderChoiceCards(`strategy-${index}`, item.options, `Estrategia para la pregunta ${index + 1}`, 'choice-cards--strategy')}
+    </div>`).join('');
+    typeset(root);
+
+    root.addEventListener('change', (event) => {
+      const input = event.target.closest('input[type="radio"]');
+      if (!input || input.disabled) return;
+      const question = input.closest('.strategy-question');
       const index = Number(question.dataset.index);
-      const ok = Number(button.dataset.option) === data[index].answer;
-      button.classList.add(ok ? 'correct' : 'wrong');
+      const choiceIndex = Number(input.value);
+      const ok = choiceIndex === data[index].answer;
+      $$('.choice-card', question).forEach((card) => card.classList.remove('correct', 'wrong'));
+      input.closest('.choice-card').classList.add(ok ? 'correct' : 'wrong');
       if (ok) {
-        $$('.strategy-options button', question).forEach((b) => b.disabled = true);
+        $$('input[type="radio"]', question).forEach((radio) => { radio.disabled = true; });
         question.dataset.resolved = 'true';
         if ($$('.strategy-question[data-resolved="true"]', root).length === data.length) markCompleted('activity:strategy');
       }
@@ -509,7 +536,7 @@
 
   function setupAbsoluteCases() {
     $('#checkCases').addEventListener('click', () => {
-      const ok = $('#caseA').value === 'correct' && $('#caseB').value === 'correct';
+      const ok = selectedRadioValue('caseA') === 'correct' && selectedRadioValue('caseB') === 'correct';
       const feedback = $('#casesFeedback');
       feedback.className = `feedback show ${ok ? 'correct' : 'incorrect'}`;
       feedback.innerHTML = ok

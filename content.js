@@ -407,14 +407,14 @@ window.APP_CONTENT = {
     {
       module: 'Pensamiento crítico',
       prompt: String.raw`Si \(a<b\), ¿siempre se cumple \(ac<bc\)?`,
-      options: ['Sí, para todo real \(c\).', 'Solo si \(c>0\).', 'Solo si \(c<0\).', 'Nunca.'],
+      options: [String.raw`Sí, para todo real \(c\).`, String.raw`Solo si \(c>0\).`, String.raw`Solo si \(c<0\).`, 'Nunca.'],
       answer: 1,
       feedback: 'Si \(c<0\), el sentido se invierte; si \(c=0\), ambos productos son iguales.'
     },
     {
       module: 'Pensamiento crítico',
       prompt: String.raw`Si \(a<b\), ¿siempre se cumple \(a^2<b^2\)?`,
-      options: ['Sí.', 'No; por ejemplo, \(-3<-2\) pero \(9>4\).', 'Solo cuando ambos son negativos.', 'Solo si \(a=0\).'],
+      options: ['Sí.', String.raw`No; por ejemplo, \(-3<-2\) pero \(9>4\).`, 'Solo cuando ambos son negativos.', String.raw`Solo si \(a=0\).`],
       answer: 1,
       feedback: 'Elevar al cuadrado no conserva el orden en todo \(\mathbb R\).'
     },

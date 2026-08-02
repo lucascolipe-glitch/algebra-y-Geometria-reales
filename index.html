@@ -226,13 +226,21 @@
         <article class="activity-card" id="setOperations">
           <div class="activity-header"><div><p class="tag">Práctica</p><h3>Unión e intersección</h3></div></div>
           <p>Sean \(A=(-2,2]\) y \(B=[0,6)\). Seleccioná las respuestas correctas.</p>
-          <div class="mini-question">
-            <label for="unionAnswer">\(A\cup B=\)</label>
-            <select id="unionAnswer"><option value="">Elegir…</option><option value="wrong1">\((-2,2]\)</option><option value="correct">\((-2,6)\)</option><option value="wrong2">\([0,2]\)</option></select>
+          <div class="choice-question">
+            <p class="choice-question__prompt" id="unionPrompt">\(A\cup B=\)</p>
+            <div class="choice-cards choice-cards--three" role="radiogroup" aria-labelledby="unionPrompt">
+              <label class="choice-card"><input type="radio" name="unionAnswer" value="wrong1"><span class="choice-card__content">\((-2,2]\)</span></label>
+              <label class="choice-card"><input type="radio" name="unionAnswer" value="correct"><span class="choice-card__content">\((-2,6)\)</span></label>
+              <label class="choice-card"><input type="radio" name="unionAnswer" value="wrong2"><span class="choice-card__content">\([0,2]\)</span></label>
+            </div>
           </div>
-          <div class="mini-question">
-            <label for="intersectionAnswer">\(A\cap B=\)</label>
-            <select id="intersectionAnswer"><option value="">Elegir…</option><option value="wrong1">\((-2,6)\)</option><option value="correct">\([0,2]\)</option><option value="wrong2">\(\varnothing\)</option></select>
+          <div class="choice-question">
+            <p class="choice-question__prompt" id="intersectionPrompt">\(A\cap B=\)</p>
+            <div class="choice-cards choice-cards--three" role="radiogroup" aria-labelledby="intersectionPrompt">
+              <label class="choice-card"><input type="radio" name="intersectionAnswer" value="wrong1"><span class="choice-card__content">\((-2,6)\)</span></label>
+              <label class="choice-card"><input type="radio" name="intersectionAnswer" value="correct"><span class="choice-card__content">\([0,2]\)</span></label>
+              <label class="choice-card"><input type="radio" name="intersectionAnswer" value="wrong2"><span class="choice-card__content">\(\varnothing\)</span></label>
+            </div>
           </div>
           <button class="button primary" id="checkSetOperations" type="button">Comprobar</button>
           <div class="feedback" id="setOperationsFeedback" aria-live="polite"></div>
@@ -305,11 +313,13 @@
           <div class="sign-workspace">
             <div class="formula-panel">\[\frac{x+3}{x-1}-2=\frac{-x+5}{x-1}\]</div>
             <div class="critical-points"><span>Puntos críticos:</span><button type="button" class="chip" data-critical="1">\(1\)</button><button type="button" class="chip" data-critical="5">\(5\)</button></div>
-            <fieldset>
+            <fieldset class="selection-fieldset">
               <legend>¿Dónde es positiva la fracción?</legend>
-              <label><input type="radio" name="signSolution" value="a"> \(( -\infty,1)\cup(5,+\infty)\)</label>
-              <label><input type="radio" name="signSolution" value="b"> \((1,5)\)</label>
-              <label><input type="radio" name="signSolution" value="c"> \([1,5]\)</label>
+              <div class="choice-cards choice-cards--three">
+                <label class="choice-card"><input type="radio" name="signSolution" value="a"><span class="choice-card__content">\(( -\infty,1)\cup(5,+\infty)\)</span></label>
+                <label class="choice-card"><input type="radio" name="signSolution" value="b"><span class="choice-card__content">\((1,5)\)</span></label>
+                <label class="choice-card"><input type="radio" name="signSolution" value="c"><span class="choice-card__content">\([1,5]\)</span></label>
+              </div>
             </fieldset>
             <button class="button primary" id="checkSignSolution" type="button">Comprobar</button>
             <div class="feedback" id="signSolutionFeedback" aria-live="polite"></div>
@@ -400,8 +410,22 @@
           <div class="activity-header"><div><p class="tag">Práctica por casos</p><h3>Resolver \(|2x+7|=-3x+6\)</h3></div></div>
           <p>La incógnita aparece dentro y fuera del valor absoluto. Completá las dos ramas.</p>
           <div class="case-grid">
-            <div class="case-box"><h4>Caso A</h4><p>Si \(2x+7\ge0\), entonces:</p><select id="caseA"><option value="">Elegir ecuación…</option><option value="correct">\(2x+7=-3x+6\)</option><option value="wrong">\(-(2x+7)=-3x+6\)</option></select></div>
-            <div class="case-box"><h4>Caso B</h4><p>Si \(2x+7&lt;0\), entonces:</p><select id="caseB"><option value="">Elegir ecuación…</option><option value="wrong">\(2x+7=-3x+6\)</option><option value="correct">\(-(2x+7)=-3x+6\)</option></select></div>
+            <fieldset class="case-box">
+              <legend>Caso A</legend>
+              <p id="caseAPrompt">Si \(2x+7\ge0\), entonces:</p>
+              <div class="choice-cards choice-cards--stacked" role="radiogroup" aria-labelledby="caseAPrompt">
+                <label class="choice-card"><input type="radio" name="caseA" value="correct"><span class="choice-card__content">\(2x+7=-3x+6\)</span></label>
+                <label class="choice-card"><input type="radio" name="caseA" value="wrong"><span class="choice-card__content">\(-(2x+7)=-3x+6\)</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="case-box">
+              <legend>Caso B</legend>
+              <p id="caseBPrompt">Si \(2x+7&lt;0\), entonces:</p>
+              <div class="choice-cards choice-cards--stacked" role="radiogroup" aria-labelledby="caseBPrompt">
+                <label class="choice-card"><input type="radio" name="caseB" value="wrong"><span class="choice-card__content">\(2x+7=-3x+6\)</span></label>
+                <label class="choice-card"><input type="radio" name="caseB" value="correct"><span class="choice-card__content">\(-(2x+7)=-3x+6\)</span></label>
+              </div>
+            </fieldset>
           </div>
           <button class="button primary" id="checkCases" type="button">Comprobar ramas</button>
           <div class="feedback" id="casesFeedback" aria-live="polite"></div>
