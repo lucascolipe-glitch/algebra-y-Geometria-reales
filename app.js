@@ -334,7 +334,7 @@
       $('#intervalSet').textContent = `{x ∈ ℝ : ${formatNumber(left)} ${leftClosed.checked ? '≤' : '<'} x ${rightClosed.checked ? '≤' : '<'} ${formatNumber(right)}}`;
       line.innerHTML = makeIntervalSvg(left, right, leftClosed.checked, rightClosed.checked);
     };
-
+lt
     [leftInput, rightInput, leftClosed, rightClosed].forEach((control) => control.addEventListener('input', update));
     update();
   }
