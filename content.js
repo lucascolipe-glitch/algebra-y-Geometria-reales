@@ -20,11 +20,7 @@ window.APP_CONTENT = {
         },
         {
           label: 'Por lo tanto:',
-          html: String.raw`\[x^2-2\pi x-3\pi^2=(x-3\pi)(x+\pi)\]`
-        },
-        {
-          label: 'Usar producto nulo',
-          html: String.raw`\[(x-3\pi)(x+\pi)=0\iff x-3\pi=0\ \vee\ x+\pi=0\]`
+          html: String.raw`\[ x= 3\pi\ \vee\ x= -\pi \]`
         },
         {
           label: 'Conjunto solución',
