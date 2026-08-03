@@ -11,13 +11,15 @@ window.APP_CONTENT = {
           html: String.raw`La ecuación tiene la forma \(ax^2+bx+c=0\), con \(a=1\), \(b=-2\pi\) y \(c=-3\pi^2\). Podemos factorizar o aplicar la fórmula general.`
         },
         {
-          label: 'Buscar una factorización',
-          html: String.raw`Aplicamos la fórmula de Bhaskara:\[x_{1,2}=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.\] Entonces: \[ x_{1,2}=\frac{4\pi\pm
-\sqrt{(-4\pi)^2-4\cdot1\cdot3\pi^2}}{2\cdot1} = \frac{4\pi\pm\sqrt{16\pi^2-12\pi^2}}{2}= \frac{4\pi\pm\sqrt{4\pi^2}}{2}=\frac{4\pi\pm2\pi}{2}\]
-Por lo tanto: \[x_1=\frac{4\pi+2\pi}{2}=3\pi, \qquad x_2=\frac{4\pi-2\pi}{2}=\pi.\]`
+          label: 'Aplicamos la fórmula de Bhaskara',
+          html: String.raw`\[x_{1,2}=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.\]`
         },
         {
-          label: 'Factorizar',
+          label: 'Entonces',
+          html: String.raw`\[ x_{1,2}=\frac{4\pi\pm \sqrt{(-4\pi)^2-4\cdot1\cdot3\pi^2}}{2\cdot1} = \frac{4\pi\pm\sqrt{16\pi^2-12\pi^2}}{2}= \frac{4\pi\pm\sqrt{4\pi^2}}{2}=\frac{4\pi\pm2\pi}{2}\]`
+        },
+        {
+          label: 'Por lo tanto:',
           html: String.raw`\[x^2-2\pi x-3\pi^2=(x-3\pi)(x+\pi)\]`
         },
         {
