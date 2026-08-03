@@ -70,15 +70,15 @@ window.APP_CONTENT = {
       steps: [
         {
           label: 'Condición inicial',
-          html: String.raw`Debe existir \(\sqrt{x}\) y además no puede ser cero: \(x\ge 0\) y \(x\ne0\). Por lo tanto, \(x>0\).`
+          html: String.raw`Debe existir \(\sqrt{x}\) y además no puede ser cero: \(x\ge 0\) y \(x\ne0\). Por lo tanto, \(x\gt 0\).`
         },
         {
           label: 'Elegir una sustitución segura',
-          html: String.raw`Sea \(t=\sqrt{x}\). Por la condición inicial, \(t>0\). La ecuación queda \[t-\frac{2}{t}=1.\]`
+          html: String.raw`Sea \(t=\sqrt{x}\). Por la condición inicial, \(t\gt 0\). La ecuación queda \[t-\frac{2}{t}=1.\]`
         },
         {
           label: 'Eliminar el denominador',
-          html: String.raw`Multiplicamos por \(t>0\): \[t^2-2=t.\]`
+          html: String.raw`Multiplicamos por \(t\gt 0\): \[t^2-2=t.\]`
         },
         {
           label: 'Resolver la cuadrática',
@@ -86,7 +86,7 @@ window.APP_CONTENT = {
         },
         {
           label: 'Aplicar la restricción',
-          html: String.raw`Como \(t=\sqrt{x}>0\), descartamos \(t=-1\). Queda \(\sqrt{x}=2\), luego \(x=4\).`
+          html: String.raw`Como \(t=\sqrt{x}\gt 0\), descartamos \(t=-1\). Queda \(\sqrt{x}=2\), luego \(x=4\).`
         },
         {
           label: 'Verificar en la original',
@@ -132,7 +132,7 @@ window.APP_CONTENT = {
       steps: [
         {
           label: 'Condiciones iniciales',
-          html: String.raw`Los argumentos de los logaritmos deben ser positivos: \(\sqrt{x-5}>0\) y \(\sqrt{2x-3}>0\). Esto exige \(x>5\).`
+          html: String.raw`Los argumentos de los logaritmos deben ser positivos: \(\sqrt{x-5}\gt 0\) y \(\sqrt{2x-3}\gt 0\). Esto exige \(x\gt 5\).`
         },
         {
           label: 'Unir los logaritmos',
@@ -152,7 +152,7 @@ window.APP_CONTENT = {
         },
         {
           label: 'Filtrar con la condición inicial',
-          html: String.raw`Solo \(x=6\) cumple \(x>5\). Por lo tanto, \(S=\{6\}\).`
+          html: String.raw`Solo \(x=6\) cumple \(x\gt 5\). Por lo tanto, \(S=\{6\}\).`
         },
         {
           label: 'Verificar',
@@ -171,15 +171,15 @@ window.APP_CONTENT = {
         },
         {
           label: 'Analizar el primer intervalo',
-          html: String.raw`Si \(x<0\), entonces \(-2x+4>0\) y \(x<0\). El producto es negativo.`
+          html: String.raw`Si \(x\lt 0\), entonces \(-2x+4\gt 0\) y \(x\lt 0\). El producto es negativo.`
         },
         {
           label: 'Analizar el intervalo central',
-          html: String.raw`Si \(0<x<2\), ambos factores son positivos. El producto es positivo.`
+          html: String.raw`Si \(0\lt x\lt 2\), ambos factores son positivos. El producto es positivo.`
         },
         {
           label: 'Analizar el último intervalo',
-          html: String.raw`Si \(x>2\), \(-2x+4<0\) y \(x>0\). El producto es negativo.`
+          html: String.raw`Si \(x\gt 2\), \(-2x+4\lt 0\) y \(x\gt 0\). El producto es negativo.`
         },
         {
           label: 'Incluir los ceros',
@@ -245,7 +245,7 @@ window.APP_CONTENT = {
         },
         {
           label: 'Dividir por 3',
-          html: String.raw`Como \(3>0\), el sentido de las desigualdades no cambia: \[\frac23\le x\le\frac{10}{3}.\]`
+          html: String.raw`Como \(3\gt 0\), el sentido de las desigualdades no cambia: \[\frac23\le x\le\frac{10}{3}.\]`
         },
         {
           label: 'Conjunto solución',
@@ -276,7 +276,7 @@ window.APP_CONTENT = {
         },
         {
           label: 'Interpretar la condición física',
-          html: String.raw`Debe cumplirse \(x>18\) para poder recortar dos cuadrados de \(9\,\text{cm}\) sobre cada lado. Se descarta \(x=14\).`
+          html: String.raw`Debe cumplirse \(x\gt 18\) para poder recortar dos cuadrados de \(9\,\text{cm}\) sobre cada lado. Se descarta \(x=14\).`
         },
         {
           label: 'Respuesta',
@@ -316,13 +316,13 @@ window.APP_CONTENT = {
     {
       module: 'Ecuaciones',
       prompt: String.raw`¿Cuál es la condición inicial de \(\sqrt{x}-\frac2{\sqrt{x}}=1\)?`,
-      options: [String.raw`\(x\ge0\)`, String.raw`\(x>0\)`, String.raw`\(x\ne0\)`, String.raw`\(x\in\mathbb R\)`],
+      options: [String.raw`\(x\ge0\)`, String.raw`\(x\gt 0\)`, String.raw`\(x\ne0\)`, String.raw`\(x\in\mathbb R\)`],
       answer: 1,
-      feedback: 'La raíz exige \(x\ge0\) y el denominador exige \(\sqrt{x}\ne0\); juntas dan \(x>0\).'
+      feedback: 'La raíz exige \(x\ge0\) y el denominador exige \(\sqrt{x}\ne0\); juntas dan \(x\gt 0\).'
     },
     {
       module: 'Intervalos',
-      prompt: String.raw`La desigualdad \(-2<x\le5\) se escribe:`,
+      prompt: String.raw`La desigualdad \(-2 \lt x\le 5\) se escribe:`,
       options: [String.raw`\([-2,5]\)`, String.raw`\((-2,5]\)`, String.raw`\([-2,5)\)`, String.raw`\((-2,5)\)`],
       answer: 1,
       feedback: 'El extremo \(-2\) no se incluye y \(5\) sí.'
@@ -358,14 +358,14 @@ window.APP_CONTENT = {
     {
       module: 'Dominio',
       prompt: String.raw`La raíz cúbica \(\sqrt[3]{x-\frac54}\) es real para:`,
-      options: [String.raw`\(x\ge\frac54\)`, String.raw`\(x>\frac54\)`, String.raw`\(x\le\frac54\)`, String.raw`todo \(x\in\mathbb R\)`],
+      options: [String.raw`\(x\ge\frac54\)`, String.raw`\(x\gt \frac54\)`, String.raw`\(x\le\frac54\)`, String.raw`todo \(x\in\mathbb R\)`],
       answer: 3,
       feedback: 'Las raíces de índice impar admiten cualquier radicando real.'
     },
     {
       module: 'Valor absoluto',
-      prompt: String.raw`La igualdad \(|u|=d\), con \(d>0\), equivale a:`,
-      options: [String.raw`\(u=d\)`, String.raw`\(-d\le u\le d\)`, String.raw`\(u=d\ \vee\ u=-d\)`, String.raw`\(u<-d\ \vee\ u>d\)`],
+      prompt: String.raw`La igualdad \(|u|=d\), con \(d\gt 0\), equivale a:`,
+      options: [String.raw`\(u=d\)`, String.raw`\(-d\le u\le d\)`, String.raw`\(u=d\ \vee\ u=-d\)`, String.raw`\(u \lt -d\ \vee\ u\gt d\)`],
       answer: 2,
       feedback: 'Dos números están a distancia \(d\) del cero: \(d\) y \(-d\).'
     },
@@ -393,7 +393,7 @@ window.APP_CONTENT = {
     {
       module: 'Logaritmos',
       prompt: String.raw`Para que \(\log(x+5)\) exista, debe cumplirse:`,
-      options: [String.raw`\(x+5\ge0\)`, String.raw`\(x+5>0\)`, String.raw`\(x+5\ne0\)`, String.raw`\(x>5\)`],
+      options: [String.raw`\(x+5\ge0\)`, String.raw`\(x+5\gt 0\)`, String.raw`\(x+5\ne0\)`, String.raw`\(x\gt 5\)`],
       answer: 1,
       feedback: 'El argumento de un logaritmo real debe ser estrictamente positivo.'
     },
@@ -406,15 +406,15 @@ window.APP_CONTENT = {
     },
     {
       module: 'Pensamiento crítico',
-      prompt: String.raw`Si \(a<b\), ¿siempre se cumple \(ac<bc\)?`,
-      options: [String.raw`Sí, para todo real \(c\).`, String.raw`Solo si \(c>0\).`, String.raw`Solo si \(c<0\).`, 'Nunca.'],
+      prompt: String.raw`Si \(a\lt b\), ¿siempre se cumple \(ac\lt bc\)?`,
+      options: [String.raw`Sí, para todo real \(c\).`, String.raw`Solo si \(c\gt 0\).`, String.raw`Solo si \(c\lt 0\).`, 'Nunca.'],
       answer: 1,
-      feedback: 'Si \(c<0\), el sentido se invierte; si \(c=0\), ambos productos son iguales.'
+      feedback: 'Si \(c\lt 0\), el sentido se invierte; si \(c=0\), ambos productos son iguales.'
     },
     {
       module: 'Pensamiento crítico',
-      prompt: String.raw`Si \(a<b\), ¿siempre se cumple \(a^2<b^2\)?`,
-      options: ['Sí.', String.raw`No; por ejemplo, \(-3<-2\) pero \(9>4\).`, 'Solo cuando ambos son negativos.', String.raw`Solo si \(a=0\).`],
+      prompt: String.raw`Si \(a\lt b\), ¿siempre se cumple \(a^2\lt b^2\)?`,
+      options: ['Sí.', String.raw`No; por ejemplo, \(-3\lt -2\) pero \(9\gt 4\).`, 'Solo cuando ambos son negativos.', String.raw`Solo si \(a=0\).`],
       answer: 1,
       feedback: 'Elevar al cuadrado no conserva el orden en todo \(\mathbb R\).'
     },
