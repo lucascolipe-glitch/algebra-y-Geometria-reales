@@ -12,7 +12,33 @@ window.APP_CONTENT = {
         },
         {
           label: 'Buscar una factorización',
-          html: String.raw`Necesitamos dos términos cuyo producto sea \(-3\pi^2\) y cuya suma sea \(-2\pi\): \(-3\pi\) y \(\pi\).`
+          html: String.raw`Aplicamos la fórmula de Bhaskara:\[
+x_{1,2}=
+\frac{-b\pm\sqrt{b^2-4ac}}{2a}.
+\]
+Entonces:
+\begin{align*}
+x_{1,2}
+&=
+\frac{4\pi\pm
+\sqrt{(-4\pi)^2-4\cdot1\cdot3\pi^2}}
+{2\cdot1}
+\\[2mm]
+&=
+\frac{4\pi\pm\sqrt{16\pi^2-12\pi^2}}{2}
+\\[2mm]
+&=
+\frac{4\pi\pm\sqrt{4\pi^2}}{2}
+\\[2mm]
+&=
+\frac{4\pi\pm2\pi}{2}.
+\end{align*}
+Por lo tanto:
+\[
+x_1=\frac{4\pi+2\pi}{2}=3\pi,
+\qquad
+x_2=\frac{4\pi-2\pi}{2}=\pi.
+\]`
         },
         {
           label: 'Factorizar',
