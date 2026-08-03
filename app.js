@@ -126,6 +126,7 @@
   }
 
   function showModule(id, updateHash = true) {
+    pauseVideosOutside(id);
     $$('.module').forEach((section) => {
       const active = section.id === id;
       section.hidden = !active;
@@ -334,7 +335,7 @@
       $('#intervalSet').textContent = `{x ∈ ℝ : ${formatNumber(left)} ${leftClosed.checked ? '≤' : '<'} x ${rightClosed.checked ? '≤' : '<'} ${formatNumber(right)}}`;
       line.innerHTML = makeIntervalSvg(left, right, leftClosed.checked, rightClosed.checked);
     };
-lt
+
     [leftInput, rightInput, leftClosed, rightClosed].forEach((control) => control.addEventListener('input', update));
     update();
   }
@@ -576,11 +577,38 @@ lt
     $$('.load-video').forEach((button) => {
       button.addEventListener('click', () => {
         const card = button.closest('[data-video-id]');
-        const id = card.dataset.videoId;
-        const placeholder = $('.video-placeholder', card);
-        placeholder.outerHTML = `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0" title="Video de apoyo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        const id = card?.dataset.videoId?.trim();
+        const placeholder = card ? $('.video-placeholder', card) : null;
+
+        if (!card || !id || !placeholder) {
+          showToast('No se pudo cargar este video. Revisá su configuración.');
+          return;
+        }
+
+        const iframe = document.createElement('iframe');
+        iframe.className = 'video-frame';
+        iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&enablejsapi=1`;
+        iframe.title = card.querySelector('h3')?.textContent?.trim() || 'Video de apoyo';
+        iframe.loading = 'lazy';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        placeholder.replaceWith(iframe);
+
         button.disabled = true;
         button.textContent = 'Video cargado';
+      });
+    });
+  }
+
+  function pauseVideosOutside(activeModuleId) {
+    $$('.module').forEach((section) => {
+      if (section.id === activeModuleId) return;
+      $$('.video-frame', section).forEach((iframe) => {
+        iframe.contentWindow?.postMessage(JSON.stringify({
+          event: 'command',
+          func: 'pauseVideo',
+          args: []
+        }), '*');
       });
     });
   }
@@ -632,12 +660,31 @@ lt
     let score = 0;
     let answered = false;
 
-    $('#startQuiz').addEventListener('click', start);
-    $('#submitQuizAnswer').addEventListener('click', submit);
-    $('#nextQuizQuestion').addEventListener('click', next);
+    const startButton = $('#startQuiz');
+    const submitButton = $('#submitQuizAnswer');
+    const nextButton = $('#nextQuizQuestion');
+
+    if (!startButton || !submitButton || !nextButton) return;
+
+    if (!allQuestions.length) {
+      startButton.disabled = true;
+      startButton.textContent = 'Autoevaluación no disponible';
+      const intro = $('#quizIntro');
+      if (intro) {
+        const warning = document.createElement('p');
+        warning.className = 'feedback show incorrect';
+        warning.textContent = 'No se encontraron preguntas para la autoevaluación.';
+        intro.appendChild(warning);
+      }
+      return;
+    }
+
+    startButton.addEventListener('click', start);
+    submitButton.addEventListener('click', submit);
+    nextButton.addEventListener('click', next);
 
     function start() {
-      quizQuestions = shuffle([...allQuestions]).slice(0, 10);
+      quizQuestions = shuffle([...allQuestions]).slice(0, Math.min(10, allQuestions.length));
       current = 0;
       score = 0;
       answered = false;
@@ -649,6 +696,10 @@ lt
 
     function renderQuestion() {
       const question = quizQuestions[current];
+      if (!question) {
+        showToast('No se pudo mostrar la pregunta. Reiniciá la autoevaluación.');
+        return;
+      }
       $('#quizProgress').textContent = `Pregunta ${current + 1} de ${quizQuestions.length}`;
       $('#quizScore').textContent = `Puntaje: ${score}`;
       $('#quizCard').innerHTML = `
